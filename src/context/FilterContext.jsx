@@ -1,20 +1,3 @@
-import { createContext, useState } from 'react';
-export const FilterContext = createContext("");
-
-export const FilterProvider = ({ children }) => {
-  const [filter, setFilter] = useState({
-    category: 'Todas',
-    search: '',
-  });
-
-  return (
-    <FilterContext.Provider value={{ filter, setFilter }}>
-      {children}
-    </FilterContext.Provider>
-  );
-};
-
-
 export const initialProducts = [
   { id: 1, name: "Zapatillas Deportivas", category: "Zapatos", price: 59.99 },
   { id: 2, name: "Camiseta Básica", category: "Camisetas", price: 19.99 },

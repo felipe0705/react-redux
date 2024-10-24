@@ -1,15 +1,11 @@
 // components/ProductList.js
-import React, { useContext } from 'react';
-import { FilterContext,initialProducts } from '../context/FilterContext';
 
-const ProductList = () => {
-  const { filter } = useContext(FilterContext);
-
-  const items = initialProducts;
+const ProductList = ({items,category,search}) => {
+  
 
   const filteredItems = items.filter((item) => {
-    const matchesCategory = filter.category === 'Todas' || item.category === filter.category;
-    const matchesSearch = item.name.toLowerCase().includes(filter.search.toLowerCase());
+    const matchesCategory = category === 'Todas' || item.category === category;
+    const matchesSearch = item.name.toLowerCase().includes(search.toLowerCase());
     return matchesCategory && matchesSearch;
   });
 

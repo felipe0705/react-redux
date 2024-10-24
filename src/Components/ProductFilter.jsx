@@ -1,22 +1,12 @@
-import{ useContext } from 'react';
-import { FilterContext } from '../context/FilterContext';
 
-const ProductFilter = () => {
-  const { filter, setFilter } = useContext(FilterContext);
+const ProductFilter = ({category, handleCategoryChange, search, handleSearchChange}) => {
 
-  const handleCategoryChange = (e) => {
-    setFilter((prev) => ({ ...prev, category: e.target.value }));
-  };
-
-  const handleSearchChange = (e) => {
-    setFilter((prev) => ({ ...prev, search: e.target.value }));
-  };
 
   return (
     <div style={styles.container}>
       <label style={styles.label}>
         Categoría:
-        <select value={filter.category} onChange={handleCategoryChange} style={styles.select}>
+        <select value={category} onChange={(e)=>handleCategoryChange(e.target.value)} style={styles.select}>
           <option value="Todas">Todas</option>
           <option value="Zapatos">Zapatos</option>
           <option value="Camisetas">Camisetas</option>
@@ -28,8 +18,8 @@ const ProductFilter = () => {
         Buscar:
         <input
           type="text"
-          value={filter.search}
-          onChange={handleSearchChange}
+          value={search}
+          onChange={(e) => handleSearchChange(e.target.value)}
           placeholder="Buscar productos..."
           style={styles.input}
         />
