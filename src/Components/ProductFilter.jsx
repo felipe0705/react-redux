@@ -1,17 +1,16 @@
 import { SET_CATEGORY, SET_SEARCH,FilterStateContext,FilterDispatchContext } from '../context/FilterContext';
-import { useDispatch, useSelector } from 'react-redux';
-import { setCategory, setSearch } from '../store/actions/productActions';
+import { useContext } from 'react';
 
 
 const ProductFilter = () => {
-  const {category,search} = useSelector((state) => state.productsStore);
-  const dispatch = useDispatch();
+  const {category,search} = useContext(FilterStateContext);
+  const dispatch = useContext(FilterDispatchContext)
 
   return (
     <div style={styles.container}>
       <label style={styles.label}>
         Categoría:
-        <select value={category} onChange={(e)=>dispatch(setCategory(e.target.value))} style={styles.select}>
+        <select value={category} onChange={(e)=>dispatch({type:SET_CATEGORY,payload:e.target.value})} style={styles.select}>
           <option value="Todas">Todas</option>
           <option value="Zapatos">Zapatos</option>
           <option value="Camisetas">Camisetas</option>
@@ -24,7 +23,7 @@ const ProductFilter = () => {
         <input
           type="text"
           value={search}
-          onChange={(e)=>dispatch(setSearch(e.target.value))}
+          onChange={(e)=>dispatch({type:SET_SEARCH,payload:e.target.value})}
           placeholder="Buscar productos..."
           style={styles.input}
         />
