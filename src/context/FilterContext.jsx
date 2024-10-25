@@ -28,7 +28,7 @@ const productReducer = (state, action) => {
   }
 };
 
-export const initialProducts = [
+const initialProducts = [
   { id: 1, name: "Zapatillas Deportivas", category: "Zapatos", price: 59.99 },
   { id: 2, name: "Camiseta Básica", category: "Camisetas", price: 19.99 },
   { id: 3, name: "Gorra de Béisbol", category: "Accesorios", price: 14.99 },

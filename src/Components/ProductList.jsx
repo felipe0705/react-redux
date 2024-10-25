@@ -1,11 +1,13 @@
 // components/ProductList.js
 import React, { useContext } from 'react';
 import {FilterStateContext } from '../context/FilterContext';
+import { useSelector } from 'react-redux';
 
 const ProductList = () => {
-  const {products, category, search } = useContext(FilterStateContext);
+  // const {products, category, search } = useContext(FilterStateContext);
+  const {products,category,search} = useSelector((state) => state.productsStore);
 
-  const items = products;
+  const items = products
 
   const filteredItems = items.filter((item) => {
     const matchesCategory = category === 'Todas' || item.category === category;

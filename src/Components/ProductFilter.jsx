@@ -1,9 +1,12 @@
 import{  useContext } from 'react';
 import { SET_CATEGORY, SET_SEARCH,FilterStateContext,FilterDispatchContext } from '../context/FilterContext';
+import { useDispatch, useSelector } from 'react-redux';
 
 const ProductFilter = () => {
-  const {category, search} = useContext(FilterStateContext);
-  const dispatch = useContext(FilterDispatchContext);
+  // const {category, search} = useContext(FilterStateContext);
+  // const dispatch = useContext(FilterDispatchContext);
+  const {category,search} = useSelector((state) => state.filter);
+  const dispatch = useDispatch();
 
   return (
     <div style={styles.container}>
