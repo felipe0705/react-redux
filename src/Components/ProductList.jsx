@@ -1,11 +1,10 @@
 // components/ProductList.js
-import React, { useContext } from 'react';
-import {FilterStateContext } from '../context/FilterContext';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart } from '../store/actions/cartActions';
 
 const ProductList = () => {
-  // const {products, category, search } = useContext(FilterStateContext);
   const {products,category,search} = useSelector((state) => state.productsStore);
+  const dispatch = useDispatch();
 
   const items = products
 
@@ -23,7 +22,7 @@ const ProductList = () => {
           <h3>{product.name}</h3>
           <p>Categoría: {product.category}</p>
           <p>Precio: ${product.price.toFixed(2)}</p>
-          <button onClick={() => handleAddToCart(product)} style={styles.button}>
+          <button onClick={()=>dispatch(addToCart(product))} style={styles.button}>
             Añadir al Carrito
           </button>
         </div>
