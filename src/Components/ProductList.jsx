@@ -1,18 +1,18 @@
 import { useContext } from 'react';
 import { FilterDispatchContext, FilterStateContext } from '../context/FilterContext';
+import { useSelector,useDispatch } from 'react-redux';
+import {addToCart} from "../store/actions/cartActions"
 
 const ProductList = () => {
-  const {products,category,search} = useContext(FilterStateContext);
+  const {products,category,search} = useSelector((state)=>state.productStore);
+  const dispatch = useDispatch();
 
-  const items = products
-
-  const filteredItems = items.filter((item) => {
+  const filteredItems = products.filter((item) => {
     const matchesCategory = category === 'Todas' || item.category === category;
     const matchesSearch = item.name.toLowerCase().includes(search.toLowerCase());
     return matchesCategory && matchesSearch;
   });
-
-
+  
   return (
     <div style={styles.grid}>
       {filteredItems.map((product) => (
@@ -20,7 +20,7 @@ const ProductList = () => {
           <h3>{product.name}</h3>
           <p>Categoría: {product.category}</p>
           <p>Precio: ${product.price.toFixed(2)}</p>
-          <button onClick={()=>handleAddToCart} style={styles.button}>
+          <button onClick={()=>dispatch(addToCart(product))} style={styles.button}>
             Añadir al Carrito
           </button>
         </div>
