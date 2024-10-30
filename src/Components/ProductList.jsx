@@ -1,10 +1,16 @@
 // components/ProductList.js
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../store/actions/cartActions';
+import { getProducts } from '../store/actions/productActions';
+import { useEffect } from 'react';
 
 const ProductList = () => {
-  const {products,category,search} = useSelector((state) => state.productsStore);
+  const {products,category,search,loading, error} = useSelector((state) => state.productsStore);
   const dispatch = useDispatch();
+
+  if (loading) {
+    return <div>Cargando...</div>
+  }
 
   const items = products
 
@@ -18,7 +24,7 @@ const ProductList = () => {
   return (
     <div style={styles.grid}>
       {filteredItems.map((product) => (
-        <div key={product.id} style={styles.card}>
+        <div key={product._id} style={styles.card}>
           <h3>{product.name}</h3>
           <p>Categoría: {product.category}</p>
           <p>Precio: ${product.price.toFixed(2)}</p>
