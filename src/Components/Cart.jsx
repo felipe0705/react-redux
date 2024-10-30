@@ -1,8 +1,15 @@
+import  { useState } from 'react';
 
 const Cart = () => {
-  const cartItems = []
+  const [cartItems, setCartItems] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
 
-  const totalPrice = 0
+  const handleDelete = (id) => {
+    const newCartItems = cartItems.filter(item => item.id !== id);
+    setCartItems(newCartItems);
+    const newTotalPrice = newCartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+    setTotalPrice(newTotalPrice);
+  };
 
   if (cartItems.length === 0) {
     return <div style={styles.container}><h2>Tu carrito está vacío.</h2></div>;
@@ -19,7 +26,7 @@ const Cart = () => {
               <p>Precio: ${item.price.toFixed(2)}</p>
               <p>Cantidad: {item.quantity}</p>
             </div>
-            <button onClick={() => handleDelete} style={styles.button}>
+            <button onClick={() => handleDelete(item.id)} style={styles.button}>
               Eliminar
             </button>
           </li>
