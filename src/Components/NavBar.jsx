@@ -1,12 +1,15 @@
 // components/Navbar.js
 import React from "react";
+import { useSelector,useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { cleanCart } from "../store/actions/cartActions";
 
 const routes = { to: "/products", text: "PRODUCTS" };
 
 const Navbar = () => {
-  const cartItems = [];
-  const totalItems = 0;
+  const {items} = useSelector((state) => state.cartStore);
+  const dispatch = useDispatch();
+  const totalItems = items.reduce((totalItems,item)=>totalItems+item.quantity,0)
 
   return (
     <nav style={styles.nav}>
@@ -16,7 +19,7 @@ const Navbar = () => {
       <NavLink to="/cart" style={styles.link}>
         CART 🛒 ({totalItems})
       </NavLink>
-      <button onClick={()=>handleCleanCart} style={styles.button}>
+      <button onClick={()=>dispatch(cleanCart())} style={styles.button}>
         Clean Cart
       </button>
     </nav>
